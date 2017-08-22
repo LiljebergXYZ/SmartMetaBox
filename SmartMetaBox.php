@@ -3,10 +3,12 @@
  * Meta box generator for WordPress
  * Compatible with custom post types
  *
- * Support input types: text, textarea, checkbox, select, radio
+ * Support input types: text, textarea, checkbox, select, radio, image, wp_editor, date
+ * 
+ * Originally by Nikolay Yordanov <me@nyordanov.com> http://nyordanov.com
  *
- * @author: Nikolay Yordanov <me@nyordanov.com> http://nyordanov.com
- * @version: 1.0
+ * @author: Modified by Daniel Liljeberg <daniel@liljeberg.xyz> https://liljeberg.xyz
+ * @version: 1.1
  *
  */
 
@@ -16,6 +18,7 @@ class SmartMetaBox {
 	
 	protected $id;
 	static $prefix = '_smartmeta_';
+	private $uri;
 
 	// create meta box based on given data
 	
@@ -29,15 +32,28 @@ class SmartMetaBox {
 		add_action('save_post', array(&$this,
 			'save'
 		));
+		add_action( 'admin_enqueue_scripts', array(&$this, 
+			'load_wp_media_files')
+		);
 	}
 
 	// Add meta box for multiple post types
 	
 	public function add() {
+		global $post;
+		$pageTemplate = get_post_meta($post->ID, '_wp_page_template', true);
 		foreach ($this->meta_box['pages'] as $page) {
-			add_meta_box($this->id, $this->meta_box['title'], array(&$this,
-				'show'
-			) , $page, $this->meta_box['context'], $this->meta_box['priority']);
+			if(isset($this->meta_box['template']) && !empty($this->meta_box)) {
+				if(in_array($pageTemplate, $this->meta_box['template'])) {
+					add_meta_box($this->id, $this->meta_box['title'], array(&$this,
+						'show'
+					) , $page, $this->meta_box['context'], $this->meta_box['priority']);
+				}
+			} else {
+				add_meta_box($this->id, $this->meta_box['title'], array(&$this,
+					'show'
+				) , $page, $this->meta_box['context'], $this->meta_box['priority']);
+			}
 		}
 	}
 
@@ -103,6 +119,24 @@ class SmartMetaBox {
 			}
 		}
 	}
+	
+	function load_wp_media_files( $page ) {
+	  // Only enquee on post page
+	  if( $page == 'post.php' ) {
+	    // Enqueue WordPress media scripts
+	    wp_enqueue_media();
+	    //Enqueue datepicker too
+	    wp_enqueue_script('jquery-ui-datepicker');
+	    // Enqueue custom script that will interact with wp.media
+	    wp_enqueue_script('oo_image_script', $this->get_own_uri() . '/scripts/imagefield.js', array('jquery'));
+	  }
+	}
+	
+	function get_own_uri() {
+		if($uri) { return $uri; }
+		return $uri = get_site_url() . '/' . str_replace(ABSPATH, '', trailingslashit(dirname(__FILE__)));
+	}
+	
 	static function get($name, $single = true, $post_id = null) {
 		global $post;
 		return get_post_meta(isset($post_id) ? $post_id : $post->ID, self::$prefix . $name, $single);
