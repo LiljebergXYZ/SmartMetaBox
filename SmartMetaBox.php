@@ -7,7 +7,7 @@
  * 
  * Originally by Nikolay Yordanov <me@nyordanov.com> http://nyordanov.com
  *
- * @author: Modified by Daniel Liljeberg <daniel@liljeberg.xyz> https://liljeberg.xyz
+ * @author: Daniel Liljeberg <daniel@liljeberg.xyz> https://liljeberg.xyz
  * @version: 1.1
  *
  */
