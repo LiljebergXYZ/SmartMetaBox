@@ -23,7 +23,7 @@ You can also choose to only show the meta box on a certain template using the ne
 
 ```php
 $options = array(
-    'template' => array('frontpage-template.php')
+	'template' => array('frontpage-template.php')
 );
 ```
 
@@ -32,7 +32,7 @@ $options = array(
 add_smart_meta_box('post_settings', array(
 	'title'     => __('Settings for post', 'mytextdomain'),
 	'pages'		=> array('post'),
-    'template' => array('frontpage-template.php'),
+	'template' => array('frontpage-template.php'),
 	'context'   => 'advanced',
 	'priority'  => 'high',
 	'fields'    => array(
