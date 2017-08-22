@@ -120,7 +120,7 @@ class SmartMetaBox {
 		}
 	}
 	
-	function load_wp_media_files( $page ) {
+	public function load_wp_media_files( $page ) {
 	  // Only enquee on post page
 	  if( $page == 'post.php' ) {
 	    // Enqueue WordPress media scripts
@@ -132,7 +132,7 @@ class SmartMetaBox {
 	  }
 	}
 	
-	function get_own_uri() {
+	private function get_own_uri() {
 		if($uri) { return $uri; }
 		return $uri = get_site_url() . '/' . str_replace(ABSPATH, '', trailingslashit(dirname(__FILE__)));
 	}
