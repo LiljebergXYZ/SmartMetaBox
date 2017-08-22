@@ -30,12 +30,12 @@ $options = array(
 ## Example usage
 ```php
 add_smart_meta_box('post_settings', array(
-	'title'     => __('Settings for post', 'mytextdomain'),
+	'title'		=> __('Settings for post', 'mytextdomain'),
 	'pages'		=> array('post'),
-	'template' => array('frontpage-template.php'),
-	'context'   => 'advanced',
-	'priority'  => 'high',
-	'fields'    => array(
+	'template'	=> array('frontpage-template.php'),
+	'context'	=> 'advanced',
+	'priority'	=> 'high',
+	'fields'	=> array(
 		array(
 			'name' => __('My setting:', 'mytextdomain'),
 			'id' => 'my_setting',
