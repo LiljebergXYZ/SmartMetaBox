@@ -13,7 +13,7 @@
 			changeYear: true,
 			dateFormat: 'MM d, yy',
 			showOn: 'button',
-			buttonText: '<?php _e('Välj datum', 'oddsonline'); ?>',
+			buttonText: '<?php _e('Select date', '_smartmeta_'); ?>',
 			onSelect : function(dateText, inst){
 				var epoch = jQuery.datepicker.formatDate('@', jQuery(this).datepicker('getDate')) / 1000;
 				jQuery('#<?php echo $id; ?>').val(epoch);
