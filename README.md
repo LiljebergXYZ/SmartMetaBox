@@ -37,11 +37,11 @@ add_smart_meta_box('post_settings', array(
 	'priority'	=> 'high',
 	'fields'	=> array(
 		array(
-			'name' => __('My setting:', 'mytextdomain'),
-			'id' => 'my_setting',
-			'default' => '',
-			'desc' => __('Please enter your setting value', 'mytextdomain'),
-			'type' => 'text',
+			'name' 		=> __('My setting:', 'mytextdomain'),
+			'id' 		=> 'my_setting',
+			'default'	=> '',
+			'desc' 		=> __('Please enter your setting value', 'mytextdomain'),
+			'type' 		=> 'text',
 		),
 	)
 ));
